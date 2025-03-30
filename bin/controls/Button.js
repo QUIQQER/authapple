@@ -2,9 +2,11 @@ define('package/quiqqer/authapple/bin/controls/Button', [
 
     'qui/QUI',
     'qui/controls/Control',
+    'package/quiqqer/authapple/bin/Apple',
+
     'css!package/quiqqer/authapple/bin/controls/Button.css'
 
-], function (QUI, QUIControl) {
+], function (QUI, QUIControl, Apple) {
     "use strict";
 
     return new Class({
@@ -13,11 +15,12 @@ define('package/quiqqer/authapple/bin/controls/Button', [
         Type: 'package/quiqqer/authapple/bin/controls/Button',
 
         Binds: [
-            '$onImport'
+            '$onImport',
+            'authenticate'
         ],
 
         initialize: function (options) {
-            this.parents(options);
+            this.parent(options);
 
             this.addEvents({
                 onImport: this.$onImport
@@ -25,7 +28,22 @@ define('package/quiqqer/authapple/bin/controls/Button', [
         },
 
         $onImport: function () {
-            console.log(this.getElm());
+            const form = this.getElm().getParent('form');
+
+            form.addEventListener('submit', function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            });
+
+            this.getElm().addEventListener('click', this.authenticate);
+        },
+
+        authenticate: function () {
+
+            Apple.authenticate().then(() => {
+                console.log('booom');
+            });
+
         }
     });
 });

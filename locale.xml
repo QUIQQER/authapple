@@ -19,5 +19,18 @@
             <de><![CDATA[QUIQQER Registrierung und Authentifikation mittels Apple-Konto]]></de>
             <en><![CDATA[QUIQQER registration and authentication via Apple Account]]></en>
         </locale>
+
+        <locale name="registrar.title">
+            <de><![CDATA[Registrierung via Apple]]></de>
+            <en><![CDATA[Registration via Apple]]></en>
+        </locale>
+        <locale name="registrar.description">
+            <de><![CDATA[QUIQQER Registrierung und Authentifikation mittels Apple-Konto]]></de>
+            <en><![CDATA[QUIQQER registration and authentication via Apple Account]]></en>
+        </locale>
+        <locale name="button.title">
+            <de><![CDATA[Weiter mit Apple]]></de>
+            <en><![CDATA[Continue with Apple]]></en>
+        </locale>
     </groups>
 </locales>

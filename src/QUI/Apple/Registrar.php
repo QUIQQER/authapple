@@ -6,11 +6,9 @@ use QUI;
 use QUI\FrontendUsers;
 
 /**
- * Class Email\Registrar
+ * Class Registrar
  *
- * Registration via e-mail address
- *
- * @package QUI\Registration\Google
+ * Registration via apple address
  */
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
