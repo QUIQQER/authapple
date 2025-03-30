@@ -1,0 +1,36 @@
+<quiqqer>
+    <package>
+        <title>
+            <locale group="quiqqer/authapple" var="package.title"/>
+        </title>
+
+        <description>
+            <locale group="quiqqer/authapple" var="package.description"/>
+        </description>
+
+        <image src="URL_OPT_DIR/quiqqer/authapple/bin/images/Logo.jpg"/>
+
+        <preview>
+            <image src="URL_OPT_DIR/quiqqer/authapple/bin/images/preview/Frontend_Registration.png"/>
+            <image src="URL_OPT_DIR/quiqqer/authapple/bin/images/preview/Backend_Settings.png"/>
+        </preview>
+
+        <support>
+            <email><![CDATA[support@pcsg.de]]></email>
+            <forum><![CDATA[https://community.quiqqer.com]]></forum>
+            <source><![CDATA[https://dev.quiqqer.com/quiqqer/authapple]]></source>
+            <issues><![CDATA[https://dev.quiqqer.com/quiqqer/authapple/issues]]></issues>
+            <wiki><![CDATA[https://dev.quiqqer.com/quiqqer/authapple/wikis/home]]></wiki>
+        </support>
+
+        <copyright>
+            <name><![CDATA[PCSG - Computer & Internet Service OHG]]></name>
+            <license><![CDATA[GPL-3.0+]]></license>
+        </copyright>
+
+        <provider>
+            <auth src="\QUI\Apple\Auth"/>
+            <registrar src="\QUI\Apple\Registrar"/>
+        </provider>
+    </package>
+</quiqqer>

@@ -16,8 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "QUI\\Auth\\Apple\\": "src/QUI/Auth/Apple",
-            "QUI\\Registration\\Apple\\": "src/QUI/Registration/Apple"
+            "QUI\\Apple\\": "src/QUI/Apple"
         }
     },
     "scripts": {

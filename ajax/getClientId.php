@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Get Google API Client-ID
+ *
+ * @return string - Client-ID
+ */
+
+use QUI\Apple\Apple;
+
+QUI::$Ajax->registerFunction(
+    'package_quiqqer_authapple_ajax_getClientId',
+    function () {
+        return Apple::getClientId();
+    }
+);
