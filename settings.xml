@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <settings>
+        <config>
+            <section name="apiSettings">
+                <conf name="clientId">
+                    <type><![CDATA[string]]></type>
+                </conf>
+                <conf name="teamId">
+                    <type><![CDATA[string]]></type>
+                </conf>
+                <conf name="keyId">
+                    <type><![CDATA[string]]></type>
+                </conf>
+                <conf name="privateKey">
+                    <type><![CDATA[string]]></type>
+                </conf>
+            </section>
+        </config>
+
+        <window>
+            <title>
+                <locale group="quiqqer/authapple" var="settings.title"/>
+            </title>
+            <params>
+                <icon>fa fa-brands fa-apple</icon>
+            </params>
+            <categories>
+                <category name="settings">
+                    <text>
+                        <locale group="quiqqer/authapple" var="settings.category.settings.title"/>
+                    </text>
+                    <icon>fa fa-cogs</icon>
+
+                    <settings title="apiSettings" name="apiSettings">
+                        <title>
+                            <locale group="quiqqer/authapple" var="settings.apiSettings.title"/>
+                        </title>
+
+                        <input conf="apiSettings.clientId" type="text">
+                            <text>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.clientId.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.clientId.description"/>
+                            </description>
+                        </input>
+
+                        <input conf="apiSettings.teamId" type="text">
+                            <text>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.teamId.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.teamId.description"/>
+                            </description>
+                        </input>
+
+                        <input conf="apiSettings.keyId" type="text">
+                            <text>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.keyId.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.keyId.description"/>
+                            </description>
+                        </input>
+
+                        <input conf="apiSettings.privateKey" type="text">
+                            <text>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.privateKey.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/authapple" var="settings.apiSettings.privateKey.description"/>
+                            </description>
+                        </input>
+                    </settings>
+                </category>
+            </categories>
+        </window>
+    </settings>
+</quiqqer>

@@ -32,5 +32,64 @@
             <de><![CDATA[Weiter mit Apple]]></de>
             <en><![CDATA[Continue with Apple]]></en>
         </locale>
+
+        <locale name="settings.title">
+            <de><![CDATA[Apple Registrierung / Authentifikation]]></de>
+            <en><![CDATA[Apple registration / authentication]]></en>
+        </locale>
+
+        <locale name="settings.category.settings.title">
+            <de><![CDATA[API-Einstellungen]]></de>
+            <en><![CDATA[API Settings]]></en>
+        </locale>
+
+        <locale name="settings.apiSettings.title">
+            <de><![CDATA[API-Zugangsdaten]]></de>
+            <en><![CDATA[API Credentials]]></en>
+        </locale>
+
+        <locale name="settings.apiSettings.clientId.title">
+            <de><![CDATA[Client ID (Service ID)]]></de>
+            <en><![CDATA[Client ID (Service ID)]]></en>
+        </locale>
+        <locale name="settings.apiSettings.clientId.description">
+            <de><![CDATA[
+            Die Service-ID, die du in deinem Apple Developer Account erstellt hast (z.B. com.meinprojekt.web).
+            ]]></de>
+            <en><![CDATA[The Service ID you created in your Apple Developer account (e.g. com.myproject.web).]]></en>
+        </locale>
+
+        <locale name="settings.apiSettings.teamId.title">
+            <de><![CDATA[Team ID]]></de>
+            <en><![CDATA[Team ID]]></en>
+        </locale>
+        <locale name="settings.apiSettings.teamId.description">
+            <de>
+                <![CDATA[Deine Team-ID aus dem Apple Developer Account (unter Mitgliedschaft/Membership sichtbar).]]></de>
+            <en><![CDATA[Your Team ID from your Apple Developer account (visible under Membership).]]></en>
+        </locale>
+
+        <locale name="settings.apiSettings.keyId.title">
+            <de><![CDATA[Key ID]]></de>
+            <en><![CDATA[Key ID]]></en>
+        </locale>
+        <locale name="settings.apiSettings.keyId.description">
+            <de>
+                <![CDATA[Die Key-ID deines privaten Schlüssels (.p8-Datei), den du für „Sign in with Apple“ erstellt hast.]]></de>
+            <en><![CDATA[The Key ID of your private key (.p8 file) you created for Sign in with Apple.]]></en>
+        </locale>
+
+        <locale name="settings.apiSettings.privateKey.title">
+            <de><![CDATA[Privater Schlüssel (.p8)]]></de>
+            <en><![CDATA[Private Key (.p8)]]></en>
+        </locale>
+        <locale name="settings.apiSettings.privateKey.description">
+            <de><![CDATA[
+            Füge hier den Inhalt deiner .p8-Datei ein, den du von Apple nach der Schlüssel-Erstellung erhalten hast.
+            ]]></de>
+            <en><![CDATA[
+            Paste the content of your .p8 file here, which you downloaded from Apple after creating the key.
+            ]]></en>
+        </locale>
     </groups>
 </locales>
