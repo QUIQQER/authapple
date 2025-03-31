@@ -36,6 +36,7 @@ define('package/quiqqer/authapple/bin/controls/Button', [
             });
 
             this.getElm().addEventListener('click', this.authenticate);
+            this.getElm().disabled = false;
         },
 
         authenticate: function () {
