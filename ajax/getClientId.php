@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Get Google API Client-ID
+ * Get Apple API Client-ID
  *
  * @return string - Client-ID
  */

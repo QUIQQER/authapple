@@ -14,9 +14,9 @@ use QUI\Locale;
 /**
  * Class Auth
  *
- * Authentication handler for Google authentication
+ * Authentication handler for Apple authentication
  *
- * @package QUI\Authe\Google2Fa
+ * @package QUI\Apple\Auth
  */
 class Auth extends AbstractAuthenticator
 {

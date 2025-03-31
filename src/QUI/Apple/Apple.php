@@ -17,6 +17,6 @@ class Apple
      */
     public static function getClientId(): string
     {
-        return QUI::getPackage('quiqqer/authgoogle')->getConfig()->get('apiSettings', 'clientId');
+        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'clientId');
     }
 }
