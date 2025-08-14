@@ -3,10 +3,11 @@ define('package/quiqqer/authapple/bin/controls/Button', [
     'qui/QUI',
     'qui/controls/Control',
     'package/quiqqer/authapple/bin/Apple',
+    'package/quiqqer/frontend-users/bin/frontend/controls/login/Login',
 
     'css!package/quiqqer/authapple/bin/controls/Button.css'
 
-], function (QUI, QUIControl, Apple) {
+], function (QUI, QUIControl, Apple, FrontendUsersLogin) {
     "use strict";
 
     return new Class({
@@ -15,6 +16,7 @@ define('package/quiqqer/authapple/bin/controls/Button', [
         Type: 'package/quiqqer/authapple/bin/controls/Button',
 
         Binds: [
+            '$click',
             '$onImport',
             'authenticate'
         ],
@@ -35,16 +37,107 @@ define('package/quiqqer/authapple/bin/controls/Button', [
                 event.preventDefault();
             });
 
-            this.getElm().addEventListener('click', this.authenticate);
+            this.getElm().addEventListener('click', this.$click);
             this.getElm().disabled = false;
         },
 
-        authenticate: function () {
+        $click: function (event) {
+            const target = event.target;
+            let button = target;
+            let token = null;
+
+            if (button.nodeName !== 'BUTTON') {
+                button = target.closest('button');
+            }
+
+            let icon = button.querySelector('.fa');
+
+            button.disabled = true;
+            icon.classList.remove('fa-brands', 'fa-apple');
+            icon.classList.add('fa-spinner', 'fa-spin');
+
+            // token form
+            const form = button.closest('form');
+
+            // nodes
+            let Registration = null;
+            let Login = null;
+
+            const registrationNode = button.closest(
+                '[data-qui="package/quiqqer/frontend-users/bin/frontend/controls/Registration"]'
+            );
+
+            if (registrationNode) {
+                Registration = QUI.Controls.getById(registrationNode.get('data-quiid'));
+            }
+
+            const loginNode = button.closest('[data-qui="controls/users/Login"]');
+
+            if (loginNode) {
+                Login = QUI.Controls.getById(loginNode.get('data-quiid'));
+            }
+
+
+            console.log('start authentication');
 
             Apple.authenticate().then(() => {
-                console.log('booom');
-            });
+                console.log('... get token');
+                return Apple.getToken();
+            }).then((tokenResult) => {
+                token = tokenResult;
+                console.log('... token', token);
 
+                if (form) {
+                    let tokenNode = form.querySelector('input[name="token"]');
+
+                    if (tokenNode) {
+                        tokenNode.parentNode.removeChild(tokenNode);
+                    }
+
+                    tokenNode = document.createElement('input');
+                    tokenNode.type = 'hidden';
+                    tokenNode.name = 'token';
+                    tokenNode.value = token;
+                    form.appendChild(tokenNode);
+                }
+
+                console.log('... check connection');
+
+                return Apple.isAccountConnectedToQuiqqer(token);
+            }).then((isConnected) => {
+                console.log('... is connected', isConnected);
+
+                // if yes: login
+                if (!isConnected) {
+                    // if not: registration
+                    if (Registration) {
+                        console.log('... registration', Registration);
+                        return Registration.$sendForm(form);
+                    }
+
+                    return new Promise((resolve, reject) => {
+                        require(['package/quiqqer/frontend-users/bin/Registration'], (registration) => {
+                            registration.register(
+                                'QUI\\Apple\\Registrar',
+                                {
+                                    token: token
+                                }
+                            ).then(resolve).catch(reject);
+                        });
+                    })
+                }
+            }).then(() => {
+                form.setAttribute('data-authenticator', 'QUI\\Apple\\Auth');
+
+                if (Login) {
+                    return Login.auth(form);
+                }
+            }).catch(() => {
+                icon.classList.add('fa-brands', 'fa-apple');
+                icon.classList.remove('fa-spinner', 'fa-spin');
+                button.disabled = false;
+            });
         }
     });
 });
+

@@ -5,6 +5,7 @@
             <field type="VARCHAR(50) NOT NULL PRIMARY KEY">userId</field>
             <field type="MEDIUMTEXT NOT NULL">email</field>
             <field type="VARCHAR(255) NOT NULL">name</field>
+            <field type="VARCHAR(255) NOT NULL">appleSub</field>
 
             <index>userId</index>
         </table>

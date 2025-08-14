@@ -64,14 +64,14 @@
                             </description>
                         </input>
 
-                        <input conf="apiSettings.privateKey" type="text">
+                        <textarea conf="apiSettings.privateKey" type="text">
                             <text>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.privateKey.title"/>
                             </text>
                             <description>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.privateKey.description"/>
                             </description>
-                        </input>
+                        </textarea>
                     </settings>
                 </category>
             </categories>

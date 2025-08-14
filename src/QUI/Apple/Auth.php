@@ -42,46 +42,38 @@ class Auth extends AbstractAuthenticator
     {
         if (!is_array($authParams) || !isset($authParams['token'])) {
             throw new QUI\Exception([
-                'quiqqer/authgoogle',
+                'quiqqer/authapple',
                 'exception.auth.wrong.data'
             ], 401);
         }
 
         $token = $authParams['token'];
-        $code = $authParams['code'];
+        Apple::validateAccessToken($token);
 
-        $clientId = Apple::getClientId();
-        $teamId = Apple::getTeamId(); // Apple Developer Team-ID
-        $keyId = Apple::getKeyId(); // Key-ID aus deinem Apple-Key (.p8)
-        $privateKey = Apple::getPrivateKeyId(); // Key-ID aus deinem Apple-Key (.p8)
+        if (!Apple::existsQuiqqerAccount($token)) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
 
+        $userData = Apple::getProfileData($token);
+        $appleSub = $userData['sub'] ?? null;
+        $Users = QUI::getUsers();
 
-        $claims = [
-            'iss' => $teamId,
-            'iat' => time(),
-            'exp' => time() + 86400 * 180,
-            'aud' => 'https://appleid.apple.com',
-            'sub' => $clientId
-        ];
+        if (empty($appleSub)) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
 
-        $clientSecret = JWT::encode($claims, $privateKey, 'ES256', $keyId);
-        $tokenUrl = 'https://appleid.apple.com/auth/token';
+        $connectionProfile = Apple::getConnectedAccountByToken($token);
 
-        $params = [
-            'grant_type' => 'authorization_code',
-            'code' => $code,
-            'redirect_uri' => '', // @todo
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret
-        ];
+        try {
+            $User = $Users->get($connectionProfile['userId']);
+            // Apple::connectQuiqqerAccount($User->getUUID(), $token, false);
 
-        $ch = curl_init($tokenUrl);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        $data = json_decode($response, true);
+            if (is_null($this->User)) {
+                $this->User = $User;
+            }
+        } catch (QUI\Exception) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
     }
 
     public function getUser(): User
