@@ -161,6 +161,7 @@ class Apple
      * Checks if a Google API access token is valid and if the user has provided
      * the necessary information (email)
      *
+     * @param string $idToken
      * @return void
      * @throws Exception
      */
