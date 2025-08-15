@@ -10,9 +10,9 @@
         "url": "https://www.pcsg.de"
     },
     "require": {
-        "quiqqer/core": "^2",
-        "google/apiclient": "^2.1",
-        "quiqqer/frontend-users": "^2"
+        "quiqqer/core": "^2.1",
+        "quiqqer/frontend-users": "^2.8",
+        "firebase/php-jwt": "^6.11"
     },
     "autoload": {
         "psr-4": {

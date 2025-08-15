@@ -2,11 +2,12 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
 
     'qui/QUI',
     'qui/classes/DOM',
+    'package/quiqqer/authapple/bin/controls/Button',
     'Ajax',
 
     'css!package/quiqqer/authapple/bin/classes/Apple.css'
 
-], function (QUI, QDOM, QUIAjax) {
+], function (QUI, QDOM, AppleButton, QUIAjax) {
     "use strict";
 
     return new Class({
@@ -25,15 +26,19 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
             this.$clientId = null;
         },
 
+        getButton: function () {
+            return new AppleButton();
+        },
+
         authenticate: function () {
             return this.loadAppleScript().then(() => {
                 return this.getClientId();
             }).then(() => {
                 if (typeof window.AppleID === 'undefined') {
-                    return;
+                    return Promise.reject('AppleID is not defined');
                 }
 
-                const redirectURI = window.location.origin + URL_OPT_DIR + 'quiqqer/authapple/oauth/bin/callback.php';
+                const redirectURI = window.location.origin + URL_OPT_DIR + 'quiqqer/authapple/bin/oauth_callback.php';
 
                 AppleID.auth.init({
                     clientId: this.$clientId,
@@ -42,16 +47,12 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
                     usePopup: true
                 });
 
-                AppleID.auth.signIn().then((response) => {
-                    console.log('Apple Response:', response);
+                return AppleID.auth.signIn().then((response) => {
                     // response.authorization.code (für Backend)
                     // response.authorization.id_token (optional, für JWT-Daten)
 
                     this.$token = response.authorization.id_token;
                     this.$code = response.authorization.code;
-
-                }).catch((error) => {
-                    console.error('Apple Login Fehler:', error);
                 });
             });
         },
@@ -67,12 +68,23 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
                     return;
                 }
 
+
+                // Workaround für AMD/RequireJS-Konflikt
+                let oldDefine = window.define;
+                window.define = undefined;
+
                 const script = document.createElement('script');
                 script.src = 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';
                 script.async = true;
                 script.defer = true;
-                script.onload = resolve;
-                script.onerror = reject;
+                script.onload = function () {
+                    window.define = oldDefine; // restore define
+                    resolve();
+                };
+                script.onerror = function () {
+                    window.define = oldDefine;
+                    reject();
+                };
                 document.head.appendChild(script);
             }).then(() => {
                 this.$loaded = true;
@@ -98,7 +110,100 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
                     onError: reject
                 });
             });
-        }
+        },
 
+        /**
+         * Get Apple id_token for currently connected Apple account
+         *
+         * @return {Promise}
+         */
+        getToken: function () {
+            if (this.$token) {
+                return Promise.resolve(this.$token);
+            }
+
+            return this.authenticate();
+        },
+
+        /**
+         * Get info of Apple profile
+         *
+         * @return {Promise}
+         */
+        getProfileInfo: function (token) {
+            return new Promise((resolve, reject) => {
+                QUIAjax.post('package_quiqqer_authapple_ajax_getDataByToken', resolve, {
+                    'package': 'quiqqer/authapple',
+                    idToken: token,
+                    onError: reject
+                });
+            });
+        },
+
+        /**
+         * Connect a Apple account with a quiqqer account
+         *
+         * @param {number} userId - QUIQQER User ID
+         * @param {string} idToken - Apple id_token
+         * @return {Promise}
+         */
+        connectQuiqqerAccount: function (userId, idToken) {
+            return new Promise(function (resolve, reject) {
+                QUIAjax.post('package_quiqqer_authapple_ajax_connectAccount', resolve, {
+                    'package': 'quiqqer/authapple',
+                    userId: userId,
+                    idToken: idToken,
+                    onError: reject
+                });
+            });
+        },
+
+        /**
+         * Connect a Apple account with a quiqqer account
+         *
+         * @param {number} userId - QUIQQER User ID
+         * @return {Promise}
+         */
+        disconnectQuiqqerAccount: function (userId) {
+            return new Promise(function (resolve, reject) {
+                QUIAjax.post('package_quiqqer_authapple_ajax_disconnectAccount', resolve, {
+                    'package': 'quiqqer/authapple',
+                    userId: userId,
+                    onError: reject
+                });
+            });
+        },
+
+        /**
+         * Get details of connected Apple account based on QUIQQER User ID
+         *
+         * @param {number} userId - QUIQQER User ID
+         * @return {Promise}
+         */
+        getAccountByQuiqqerUserId: function (userId) {
+            return new Promise(function (resolve, reject) {
+                QUIAjax.get('package_quiqqer_authapple_ajax_getAccountByQuiqqerUserId', resolve, {
+                    'package': 'quiqqer/authapple',
+                    userId: userId,
+                    onError: reject
+                });
+            });
+        },
+
+        /**
+         * Check if Apple account is connected to a QUIQQER account
+         *
+         * @param {string} idToken - Apple API id_token
+         * @return {Promise}
+         */
+        isAccountConnectedToQuiqqer: function (idToken) {
+            return new Promise(function (resolve, reject) {
+                QUIAjax.get('package_quiqqer_authapple_ajax_isAppleAccountConnected', resolve, {
+                    'package': 'quiqqer/authapple',
+                    idToken: idToken,
+                    onError: reject
+                });
+            });
+        }
     });
 });

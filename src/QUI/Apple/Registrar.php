@@ -3,14 +3,14 @@
 namespace QUI\Apple;
 
 use QUI;
+use QUI\ExceptionStack;
 use QUI\FrontendUsers;
+use QUI\Permissions\Exception;
 
 /**
- * Class Email\Registrar
+ * Class Registrar
  *
- * Registration via e-mail address
- *
- * @package QUI\Registration\Google
+ * Registration via apple address
  */
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
@@ -21,9 +21,38 @@ class Registrar extends FrontendUsers\AbstractRegistrar
         return [];
     }
 
+    public function createUser(): QUI\Interfaces\Users\User
+    {
+        $token = $this->getAttribute('token');
+
+        if (Apple::existsQuiqqerAccount($token)) {
+            return Apple::getUserByToken($token);
+        }
+
+        $User =  parent::createUser();
+        $profileData = Apple::getProfileData($token);
+        $SystemUser = QUI::getUsers()->getSystemUser();
+
+        $User->setAttributes([
+            'email' => $profileData['email'],
+            'firstname' => empty($profileData['given_name']) ? null : $profileData['given_name'],
+            'lastname' => empty($profileData['family_name']) ? null : $profileData['family_name'],
+        ]);
+
+
+        $User->setAttribute(FrontendUsers\Handler::USER_ATTR_EMAIL_VERIFIED, boolval($profileData['email_verified']));
+
+        $User->setPassword(QUI\Security\Password::generateRandom(), $SystemUser);
+        $User->save($SystemUser);
+
+        // connect Google account with QUIQQER account
+        Apple::connectQuiqqerAccount($User->getUUID(), $token, false);
+
+        return $User;
+    }
+
     public function onRegistered(QUI\Interfaces\Users\User $User): void
     {
-        // TODO: Implement onRegistered() method.
     }
 
     public function getInvalidFields(): array
@@ -35,8 +64,10 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
     public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
-        return '';
+        $token = $this->getAttribute('token');
+        $profileData = Apple::getProfileData($token);
+
+        return $profileData['email'];
     }
 
     public function getControl(): QUI\Control

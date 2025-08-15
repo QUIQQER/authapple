@@ -7,6 +7,7 @@
 namespace QUI\Apple;
 
 use QUI;
+use QUI\Exception;
 use QUI\Interfaces\Users\User;
 use QUI\Users\AbstractAuthenticator;
 use QUI\Locale;
@@ -14,9 +15,9 @@ use QUI\Locale;
 /**
  * Class Auth
  *
- * Authentication handler for Google authentication
+ * Authentication handler for Apple authentication
  *
- * @package QUI\Authe\Google2Fa
+ * @package QUI\Apple\Auth
  */
 class Auth extends AbstractAuthenticator
 {
@@ -33,9 +34,45 @@ class Auth extends AbstractAuthenticator
         }
     }
 
-    public function auth(array | int | string $authParams)
+    /**
+     * @throws Exception
+     */
+    public function auth(array | int | string $authParams): void
     {
-        // TODO: Implement auth() method.
+        if (!is_array($authParams) || !isset($authParams['token'])) {
+            throw new QUI\Exception([
+                'quiqqer/authapple',
+                'exception.auth.wrong.data'
+            ], 401);
+        }
+
+        $token = $authParams['token'];
+        Apple::validateAccessToken($token);
+
+        if (!Apple::existsQuiqqerAccount($token)) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
+
+        $userData = Apple::getProfileData($token);
+        $appleSub = $userData['sub'] ?? null;
+        $Users = QUI::getUsers();
+
+        if (empty($appleSub)) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
+
+        $connectionProfile = Apple::getConnectedAccountByToken($token);
+
+        try {
+            $User = $Users->get($connectionProfile['userId']);
+            // Apple::connectQuiqqerAccount($User->getUUID(), $token, false);
+
+            if (is_null($this->User)) {
+                $this->User = $User;
+            }
+        } catch (QUI\Exception) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
     }
 
     public function getUser(): User

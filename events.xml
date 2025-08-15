@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+    <event on="onUserDelete" fire="\QUI\Apple\Events::onUserDelete"/>
+    <event on="onQuiqqerFrontendUsersUserDelete" fire="\QUI\Apple\Events::onUserDelete"/>
+</events>

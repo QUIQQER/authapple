@@ -1,0 +1,9 @@
+.quiqqer-auth-apple-registration {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+}
+
+.quiqqer-auth-apple-registration:hover {
+    background: #1C1C1E !important;
+}
