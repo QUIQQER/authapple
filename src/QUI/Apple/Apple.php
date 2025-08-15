@@ -181,7 +181,7 @@ class Apple
         }
 
         try {
-            $payload = JWT::decode($idToken, $key);;
+            $payload = JWT::decode($idToken, $key);
         } catch (\Exception $e) {
             QUI\System\Log::addError($e->getMessage());
 
