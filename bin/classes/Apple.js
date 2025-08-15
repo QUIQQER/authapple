@@ -31,11 +31,7 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
         },
 
         authenticate: function () {
-            console.log('authenticate');
-
-
             return this.loadAppleScript().then(() => {
-                console.log('get client');
                 return this.getClientId();
             }).then(() => {
                 if (typeof window.AppleID === 'undefined') {
@@ -52,7 +48,6 @@ define('package/quiqqer/authapple/bin/classes/Apple', [
                 });
 
                 return AppleID.auth.signIn().then((response) => {
-                    console.log('Apple Response:', response);
                     // response.authorization.code (für Backend)
                     // response.authorization.id_token (optional, für JWT-Daten)
 

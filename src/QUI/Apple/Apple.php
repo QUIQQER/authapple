@@ -247,6 +247,49 @@ class Apple
         return true;
     }
 
+    /**
+     * @throws QUI\Users\Exception
+     */
+    public static function getUserByToken($idToken): QUI\Interfaces\Users\User
+    {
+        $data = self::getProfileData($idToken);
+        $appleSub = $data['sub'] ?? null;
+
+        if (empty($appleSub)) {
+            throw new QUI\Users\Exception(
+                QUI::getLocale()->get(
+                    'quiqqer/core',
+                    'exception.lib.user.wrong.uid'
+                ),
+                404
+            );
+        }
+
+        try {
+            $result = QUI::getDataBase()->fetch([
+                'from' => self::table(),
+                'where' => [
+                    'appleSub' => $appleSub
+                ],
+                'limit' => 1
+            ]);
+
+            if (isset($result[0]['userId'])) {
+                return QUI::getUsers()->get($result[0]['userId']);
+            }
+        } catch (\Exception $e) {
+            QUI\System\Log::addError($e->getMessage());
+        }
+
+        throw new QUI\Users\Exception(
+            QUI::getLocale()->get(
+                'quiqqer/core',
+                'exception.lib.user.wrong.uid'
+            ),
+            404
+        );
+    }
+
     public static function getProfileData($idToken)
     {
         /*

@@ -21,38 +21,24 @@ class Registrar extends FrontendUsers\AbstractRegistrar
         return [];
     }
 
-    /**
-     * @throws ExceptionStack
-     * @throws Exception
-     * @throws QUI\Exception
-     * @throws QUI\Users\Exception
-     * @throws QUI\Database\Exception
-     */
-    public function onRegistered(QUI\Interfaces\Users\User $User): void
+    public function createUser(): QUI\Interfaces\Users\User
     {
-        $SystemUser = QUI::getUsers()->getSystemUser();
         $token = $this->getAttribute('token');
 
-        // test if user is connected
-        // we don't want to override a connected user
         if (Apple::existsQuiqqerAccount($token)) {
-            return;
+            return Apple::getUserByToken($token);
         }
 
-        // set user data
+        $User =  parent::createUser();
         $profileData = Apple::getProfileData($token);
-
-        // check if user with email already exists
-        // if not, set the username to mail
-        if (!QUI::getUsers()->usernameExists($profileData['email'])) {
-            $User->setAttribute('username', $profileData['email']);
-        }
+        $SystemUser = QUI::getUsers()->getSystemUser();
 
         $User->setAttributes([
             'email' => $profileData['email'],
             'firstname' => empty($profileData['given_name']) ? null : $profileData['given_name'],
             'lastname' => empty($profileData['family_name']) ? null : $profileData['family_name'],
         ]);
+
 
         $User->setAttribute(FrontendUsers\Handler::USER_ATTR_EMAIL_VERIFIED, boolval($profileData['email_verified']));
 
@@ -61,6 +47,12 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
         // connect Google account with QUIQQER account
         Apple::connectQuiqqerAccount($User->getUUID(), $token, false);
+
+        return $User;
+    }
+
+    public function onRegistered(QUI\Interfaces\Users\User $User): void
+    {
     }
 
     public function getInvalidFields(): array
@@ -72,8 +64,10 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
     public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
-        return '';
+        $token = $this->getAttribute('token');
+        $profileData = Apple::getProfileData($token);
+
+        return $profileData['email'];
     }
 
     public function getControl(): QUI\Control

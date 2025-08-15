@@ -78,14 +78,10 @@ define('package/quiqqer/authapple/bin/controls/Button', [
             }
 
 
-            console.log('start authentication');
-
             Apple.authenticate().then(() => {
-                console.log('... get token');
                 return Apple.getToken();
             }).then((tokenResult) => {
                 token = tokenResult;
-                console.log('... token', token);
 
                 if (form) {
                     let tokenNode = form.querySelector('input[name="token"]');
@@ -101,17 +97,12 @@ define('package/quiqqer/authapple/bin/controls/Button', [
                     form.appendChild(tokenNode);
                 }
 
-                console.log('... check connection');
-
                 return Apple.isAccountConnectedToQuiqqer(token);
             }).then((isConnected) => {
-                console.log('... is connected', isConnected);
-
                 // if yes: login
                 if (!isConnected) {
                     // if not: registration
                     if (Registration) {
-                        console.log('... registration', Registration);
                         return Registration.$sendForm(form);
                     }
 
