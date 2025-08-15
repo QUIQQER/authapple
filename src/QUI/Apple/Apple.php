@@ -112,10 +112,29 @@ class Apple
         return current($result);
     }
 
+    /**
+     * @throws Exception
+     * @throws QUI\Database\Exception
+     */
     public static function disconnectAccount(
         int | string $userId,
         bool $checkPermission = true
     ): void {
+        if ($checkPermission !== false) {
+            self::checkEditPermission($userId);
+        }
+
+        try {
+            $User = QUI::getUsers()->get($userId);
+            $userUuid = $User->getUUID();
+        } catch (QUI\Exception) {
+            return;
+        }
+
+        QUI::getDataBase()->delete(
+            self::table(),
+            ['userId' => $userUuid]
+        );
     }
 
     /**

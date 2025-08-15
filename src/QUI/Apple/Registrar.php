@@ -3,7 +3,9 @@
 namespace QUI\Apple;
 
 use QUI;
+use QUI\ExceptionStack;
 use QUI\FrontendUsers;
+use QUI\Permissions\Exception;
 
 /**
  * Class Registrar
@@ -19,6 +21,13 @@ class Registrar extends FrontendUsers\AbstractRegistrar
         return [];
     }
 
+    /**
+     * @throws ExceptionStack
+     * @throws Exception
+     * @throws QUI\Exception
+     * @throws QUI\Users\Exception
+     * @throws QUI\Database\Exception
+     */
     public function onRegistered(QUI\Interfaces\Users\User $User): void
     {
         $SystemUser = QUI::getUsers()->getSystemUser();
@@ -32,6 +41,12 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
         // set user data
         $profileData = Apple::getProfileData($token);
+
+        // check if user with email already exists
+        // if not, set the username to mail
+        if (!QUI::getUsers()->usernameExists($profileData['email'])) {
+            $User->setAttribute('username', $profileData['email']);
+        }
 
         $User->setAttributes([
             'email' => $profileData['email'],

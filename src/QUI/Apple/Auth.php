@@ -11,7 +11,6 @@ use QUI\Exception;
 use QUI\Interfaces\Users\User;
 use QUI\Users\AbstractAuthenticator;
 use QUI\Locale;
-use Firebase\JWT\JWT;
 
 /**
  * Class Auth
