@@ -3,11 +3,11 @@ define('package/quiqqer/authapple/bin/controls/Button', [
     'qui/QUI',
     'qui/controls/Control',
     'package/quiqqer/authapple/bin/Apple',
-    'package/quiqqer/frontend-users/bin/frontend/controls/login/Login',
+    'package/quiqqer/frontend-users/bin/Registration',
 
     'css!package/quiqqer/authapple/bin/controls/Button.css'
 
-], function (QUI, QUIControl, Apple, FrontendUsersLogin) {
+], function (QUI, QUIControl, Apple, registration) {
     "use strict";
 
     return new Class({
@@ -106,16 +106,10 @@ define('package/quiqqer/authapple/bin/controls/Button', [
                         return Registration.$sendForm(form);
                     }
 
-                    return new Promise((resolve, reject) => {
-                        require(['package/quiqqer/frontend-users/bin/Registration'], (registration) => {
-                            registration.register(
-                                'QUI\\Apple\\Registrar',
-                                {
-                                    token: token
-                                }
-                            ).then(resolve).catch(reject);
-                        });
-                    })
+                    return registration.register(
+                        'QUI\\Apple\\Registrar',
+                        {token: token}
+                    );
                 }
             }).then(() => {
                 form.setAttribute('data-authenticator', 'QUI\\Apple\\Auth');
