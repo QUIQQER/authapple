@@ -125,4 +125,3 @@ define('package/quiqqer/authapple/bin/controls/Button', [
         }
     });
 });
-
