@@ -34,6 +34,11 @@ class Auth extends AbstractAuthenticator
         }
     }
 
+    public function isSecondaryAuthentication(): bool
+    {
+        return false;
+    }
+    
     /**
      * @throws Exception
      */
