@@ -23,7 +23,7 @@ class Auth extends AbstractAuthenticator
 {
     protected QUI\Interfaces\Users\User | null $User = null;
 
-    public function __construct(array | int | string $user = '')
+    public function __construct(array | int | string | User | null $user = '')
     {
         if (!empty($user) && is_string($user)) {
             try {
@@ -101,5 +101,10 @@ class Auth extends AbstractAuthenticator
     public static function getLoginControl(): ?QUI\Control
     {
         return new QUI\Apple\Controls\Button();
+    }
+
+    public function getIcon(): string
+    {
+        return 'fa fa-brands fa-apple';
     }
 }
