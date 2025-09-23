@@ -38,7 +38,7 @@ class Auth extends AbstractAuthenticator
     {
         return false;
     }
-    
+
     /**
      * @throws Exception
      */
