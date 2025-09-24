@@ -18,19 +18,30 @@
             </section>
         </config>
 
-        <window>
+        <window name="frontend-users">
+            <title>
+                <locale group="quiqqer/frontend-users" var="menu.title"/>
+            </title>
+            <params>
+                <icon>fa fa-cogs</icon>
+            </params>
+
+            <!--
             <title>
                 <locale group="quiqqer/authapple" var="settings.title"/>
             </title>
             <params>
                 <icon>fa fa-brands fa-apple</icon>
             </params>
+            -->
+
             <categories>
-                <category name="settings">
+                <category name="apple-auth-settings" index="10">
                     <text>
-                        <locale group="quiqqer/authapple" var="settings.category.settings.title"/>
+                        <!--<locale group="quiqqer/authapple" var="settings.category.settings.title"/>-->
+                        <locale group="quiqqer/authapple" var="settings.title"/>
                     </text>
-                    <icon>fa fa-cogs</icon>
+                    <icon>fa fa-brands fa-apple</icon>
 
                     <settings title="apiSettings" name="apiSettings">
                         <title>
