@@ -3,16 +3,16 @@
     <settings>
         <config>
             <section name="apiSettings">
-                <conf name="clientId">
+                <conf name="appleClientId">
                     <type><![CDATA[string]]></type>
                 </conf>
-                <conf name="teamId">
+                <conf name="appleTeamId">
                     <type><![CDATA[string]]></type>
                 </conf>
-                <conf name="keyId">
+                <conf name="appleKeyId">
                     <type><![CDATA[string]]></type>
                 </conf>
-                <conf name="privateKey">
+                <conf name="applePrivateKey">
                     <type><![CDATA[string]]></type>
                 </conf>
             </section>
@@ -48,7 +48,7 @@
                             <locale group="quiqqer/authapple" var="settings.apiSettings.title"/>
                         </title>
 
-                        <input conf="apiSettings.clientId" type="text">
+                        <input conf="apiSettings.appleClientId" type="text">
                             <text>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.clientId.title"/>
                             </text>
@@ -57,7 +57,7 @@
                             </description>
                         </input>
 
-                        <input conf="apiSettings.teamId" type="text">
+                        <input conf="apiSettings.appleTeamId" type="text">
                             <text>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.teamId.title"/>
                             </text>
@@ -66,7 +66,7 @@
                             </description>
                         </input>
 
-                        <input conf="apiSettings.keyId" type="text">
+                        <input conf="apiSettings.appleKeyId" type="text">
                             <text>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.keyId.title"/>
                             </text>
@@ -75,7 +75,7 @@
                             </description>
                         </input>
 
-                        <textarea conf="apiSettings.privateKey" type="text">
+                        <textarea conf="apiSettings.applePrivateKey" type="text">
                             <text>
                                 <locale group="quiqqer/authapple" var="settings.apiSettings.privateKey.title"/>
                             </text>
