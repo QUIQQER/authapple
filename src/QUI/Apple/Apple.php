@@ -17,7 +17,7 @@ class Apple
 
     public static function getClientId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'clientId');
+        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleClientId');
     }
 
     /**
@@ -25,7 +25,7 @@ class Apple
      */
     public static function getTeamId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'teamId');
+        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleTeamId');
     }
 
     /**
@@ -33,7 +33,7 @@ class Apple
      */
     public static function getKeyId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'keyId');
+        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleKeyId');
     }
 
     /**
@@ -41,7 +41,7 @@ class Apple
      */
     public static function getPrivateKeyId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'privateKeyId');
+        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'applePrivateKey');
     }
 
     /**
