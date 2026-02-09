@@ -15,15 +15,73 @@ use QUI\Permissions\Exception;
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
     // region auth stuff
+    /**
+     * @throws FrontendUsers\Exception
+     * @throws QUI\Exception
+     */
     public function validate(): array
     {
-        // TODO: Implement validate() method.
-        return [];
+        $lg = 'quiqqer/authapple';
+        $lgPrefix = 'exception.registrar.';
+
+        $token = $this->getAttribute('token');
+
+        if (empty($token)) {
+            throw new FrontendUsers\Exception([
+                $lg,
+                $lgPrefix . 'token_invalid'
+            ]);
+        }
+
+        try {
+            Apple::validateAccessToken($token);
+        } catch (\Exception) {
+            throw new FrontendUsers\Exception([
+                $lg,
+                $lgPrefix . 'token_invalid'
+            ]);
+        }
+
+        $profileData = Apple::getProfileData($token);
+        $email = $profileData['email'] ?? '';
+
+        if (empty($email)) {
+            throw new FrontendUsers\Exception([
+                $lg,
+                $lgPrefix . 'email_address_empty'
+            ]);
+        }
+
+        if (QUI::getUsers()->usernameExists($email)) {
+            // If the account is already connected, allow re-registration flow
+            if (!Apple::existsQuiqqerAccount($token)) {
+                throw new FrontendUsers\Exception([
+                    $lg,
+                    $lgPrefix . 'email_already_exists'
+                ]);
+            }
+        }
+
+        $Handler = FrontendUsers\Handler::getInstance();
+        $settings = $Handler->getRegistrationSettings();
+
+        if (
+            !(int)$settings['allowUnverifiedEmailAddresses']
+            && !(int)$profileData['email_verified']
+        ) {
+            throw new FrontendUsers\Exception([
+                $lg,
+                $lgPrefix . 'email_not_verified'
+            ]);
+        }
+
+        return $profileData;
     }
 
     public function createUser(): QUI\Interfaces\Users\User
     {
         $token = $this->getAttribute('token');
+        Apple::validateAccessToken($token);
 
         if (Apple::existsQuiqqerAccount($token)) {
             return Apple::getUserByToken($token);
@@ -62,9 +120,13 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
     // endregion
 
+    /**
+     * @throws Exception
+     */
     public function getUsername(): string
     {
         $token = $this->getAttribute('token');
+        Apple::validateAccessToken($token);
         $profileData = Apple::getProfileData($token);
 
         return $profileData['email'];

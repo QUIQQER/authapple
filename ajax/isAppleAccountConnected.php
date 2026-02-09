@@ -12,6 +12,7 @@ use QUI\Apple\Apple;
 QUI::$Ajax->registerFunction(
     'package_quiqqer_authapple_ajax_isAppleAccountConnected',
     function ($idToken) {
+        Apple::validateAccessToken($idToken);
         return Apple::existsQuiqqerAccount($idToken);
     },
     ['idToken']

@@ -60,6 +60,7 @@ class Apple
             self::checkEditPermission($uid);
         }
 
+        self::validateAccessToken($accessToken);
         $User = QUI::getUsers()->get($uid);
         $profileData = self::getProfileData($accessToken);
 
@@ -70,8 +71,6 @@ class Apple
                 ['email' => $profileData['email']]
             ]);
         }
-
-        self::validateAccessToken($accessToken);
 
         QUI::getDataBase()->insert(
             self::table(),
@@ -158,7 +157,7 @@ class Apple
     }
 
     /**
-     * Checks if a Google API access token is valid and if the user has provided
+     * Checks if Apple API access token is valid and if the user has provided
      * the necessary information (email)
      *
      * @param string $idToken
@@ -169,7 +168,40 @@ class Apple
     {
         // verify
         $apple_keys_url = 'https://appleid.apple.com/auth/keys';
-        $keys = json_decode(file_get_contents($apple_keys_url), true);
+        static $cachedKeys = null;
+        static $cachedKeysAt = 0;
+        $cacheTtl = 300;
+
+        if ($cachedKeys === null || (time() - $cachedKeysAt) > $cacheTtl) {
+            $context = stream_context_create([
+                'http' => [
+                    'timeout' => 3
+                ]
+            ]);
+
+            $keysJson = @file_get_contents($apple_keys_url, false, $context);
+
+            if ($keysJson === false) {
+                throw new Exception([
+                    'quiqqer/authapple',
+                    'exception.apple.invalid.token'
+                ]);
+            }
+
+            $keys = json_decode($keysJson, true);
+
+            if (!is_array($keys)) {
+                throw new Exception([
+                    'quiqqer/authapple',
+                    'exception.apple.invalid.token'
+                ]);
+            }
+
+            $cachedKeys = $keys;
+            $cachedKeysAt = time();
+        } else {
+            $keys = $cachedKeys;
+        }
         $jwk = JWK::parseKeySet($keys);
 
         // Extrahiere den "kid" aus dem Token-Header, um den richtigen Key zu wählen
@@ -197,10 +229,35 @@ class Apple
                 'exception.apple.invalid.token'
             ]);
         }
+
+        if (!isset($payload->iss) || $payload->iss !== 'https://appleid.apple.com') {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
+
+        $now = time();
+
+        if (!isset($payload->exp) || (int)$payload->exp < $now) {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
+
+        // Basic sanity check: reject tokens that claim to be issued far in the future.
+        if (isset($payload->iat) && (int)$payload->iat > $now + 60) {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
     }
 
     public static function existsQuiqqerAccount(string $idToken): bool
     {
+        self::validateAccessToken($idToken);
         $data = self::getProfileData($idToken);
         $appleSub = $data['sub'] ?? null;
 
@@ -253,6 +310,7 @@ class Apple
      */
     public static function getUserByToken($idToken): QUI\Interfaces\Users\User
     {
+        self::validateAccessToken($idToken);
         $data = self::getProfileData($idToken);
         $appleSub = $data['sub'] ?? null;
 

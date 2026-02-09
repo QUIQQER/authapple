@@ -105,5 +105,29 @@
             <de><![CDATA[Dieses Apple-Konto ist nicht mit dem übergebenen Benutzerkonto verknüpft.]]></de>
             <en><![CDATA[This Apple Account is not linked to the user ccount you submitted.]]></en>
         </locale>
+
+        <!-- Class: Registrar -->
+        <locale name="exception.registrar.token_invalid">
+            <de>
+                <![CDATA[Bei der Überprüfung Ihres Apple-Kontos ist ein Fehler aufgetreten. Bitte wenden Sie sich an einen Administrator.]]></de>
+            <en><![CDATA[There was an error checking your Apple account. Please contact an administrator.]]></en>
+        </locale>
+        <locale name="exception.registrar.email_address_empty">
+            <de>
+                <![CDATA[Ihre E-Mail-Adresse konnte nicht aus Ihrem Apple-Profil abgerufen werden. Bitte autorisieren Sie den Zugriff auf Ihre E-Mail-Adresse.]]></de>
+            <en>
+                <![CDATA[Your email address could not be retrieved from your Apple profile. Please authorize access to your e-mail address.]]></en>
+        </locale>
+        <locale name="exception.registrar.email_already_exists">
+            <de>
+                <![CDATA[Es existiert bereits ein Benutzerkonto mit Ihrer bei Apple hinterlegten E-Mail-Adresse.]]></de>
+            <en><![CDATA[There is already a user account with your Apple e-mail address.]]></en>
+        </locale>
+        <locale name="exception.registrar.email_not_verified">
+            <de>
+                <![CDATA[Ihre bei Apple hinterlegte E-Mail-Adresse ist noch nicht verifiziert. Bitte verifizieren Sie Ihre E-Mail-Adresse bei Apple, um sich zu registrieren.]]></de>
+            <en>
+                <![CDATA[Your Apple e-mail address is not yet verified. Please verify your e-mail address at Apple to register.]]></en>
+        </locale>
     </groups>
 </locales>
