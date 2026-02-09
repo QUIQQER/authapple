@@ -148,7 +148,7 @@ class Apple
         if (QUI::getSession()->get('uid') !== $userId || !$userId) {
             throw new QUI\Permissions\Exception(
                 QUI::getLocale()->get(
-                    'quiqqer/authgoogle',
+                    'quiqqer/authapple',
                     'exception.operation.only.allowed.by.own.user'
                 ),
                 401
@@ -223,7 +223,16 @@ class Apple
             ]);
         }
 
-        if (!isset($payload->aud) || $payload->aud != self::getClientId()) {
+        $aud = $payload->aud ?? null;
+        $audValid = false;
+
+        if (is_array($aud)) {
+            $audValid = in_array(self::getClientId(), $aud, true);
+        } else {
+            $audValid = ($aud === self::getClientId());
+        }
+
+        if (!$audValid) {
             throw new Exception([
                 'quiqqer/authapple',
                 'exception.apple.invalid.token'
@@ -368,10 +377,34 @@ class Apple
         */
 
         $parts = explode('.', $idToken);
+
+        if (count($parts) < 2 || empty($parts[1])) {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
+
         $payload = $parts[1];
         $payload = str_replace(['-', '_'], ['+', '/'], $payload); // base64url zu base64
-        $payload = base64_decode($payload);
+        $payload = base64_decode($payload, true);
 
-        return json_decode($payload, true);
+        if ($payload === false) {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
+
+        $data = json_decode($payload, true);
+
+        if (!is_array($data)) {
+            throw new Exception([
+                'quiqqer/authapple',
+                'exception.apple.invalid.token'
+            ]);
+        }
+
+        return $data;
     }
 }

@@ -105,6 +105,10 @@
             <de><![CDATA[Dieses Apple-Konto ist nicht mit dem übergebenen Benutzerkonto verknüpft.]]></de>
             <en><![CDATA[This Apple Account is not linked to the user ccount you submitted.]]></en>
         </locale>
+        <locale name="exception.apple.invalid.token">
+            <de><![CDATA[Das Apple-Token ist ungültig oder abgelaufen.]]></de>
+            <en><![CDATA[The Apple token is invalid or expired.]]></en>
+        </locale>
 
         <!-- Class: Registrar -->
         <locale name="exception.registrar.token_invalid">
@@ -128,6 +132,11 @@
                 <![CDATA[Ihre bei Apple hinterlegte E-Mail-Adresse ist noch nicht verifiziert. Bitte verifizieren Sie Ihre E-Mail-Adresse bei Apple, um sich zu registrieren.]]></de>
             <en>
                 <![CDATA[Your Apple e-mail address is not yet verified. Please verify your e-mail address at Apple to register.]]></en>
+        </locale>
+
+        <locale name="exception.operation.only.allowed.by.own.user">
+            <de><![CDATA[Diese Abfrage darf nur vom übergebenen Benutzer selbst durchgeführt werden.]]></de>
+            <en><![CDATA[This request can only be executed by the given user.]]></en>
         </locale>
     </groups>
 </locales>

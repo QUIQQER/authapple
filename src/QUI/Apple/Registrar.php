@@ -14,6 +14,21 @@ use QUI\Permissions\Exception;
  */
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
+    private ?array $profileData = null;
+
+    private function getProfileDataFromToken(): array
+    {
+        if (!is_null($this->profileData)) {
+            return $this->profileData;
+        }
+
+        $token = $this->getAttribute('token');
+        Apple::validateAccessToken($token);
+        $this->profileData = Apple::getProfileData($token);
+
+        return $this->profileData;
+    }
+
     // region auth stuff
     /**
      * @throws FrontendUsers\Exception
@@ -34,7 +49,7 @@ class Registrar extends FrontendUsers\AbstractRegistrar
         }
 
         try {
-            Apple::validateAccessToken($token);
+            $profileData = $this->getProfileDataFromToken();
         } catch (\Exception) {
             throw new FrontendUsers\Exception([
                 $lg,
@@ -42,7 +57,6 @@ class Registrar extends FrontendUsers\AbstractRegistrar
             ]);
         }
 
-        $profileData = Apple::getProfileData($token);
         $email = $profileData['email'] ?? '';
 
         if (empty($email)) {
@@ -81,14 +95,13 @@ class Registrar extends FrontendUsers\AbstractRegistrar
     public function createUser(): QUI\Interfaces\Users\User
     {
         $token = $this->getAttribute('token');
-        Apple::validateAccessToken($token);
+        $profileData = $this->getProfileDataFromToken();
 
         if (Apple::existsQuiqqerAccount($token)) {
             return Apple::getUserByToken($token);
         }
 
         $User =  parent::createUser();
-        $profileData = Apple::getProfileData($token);
         $SystemUser = QUI::getUsers()->getSystemUser();
 
         $User->setAttributes([
@@ -125,9 +138,7 @@ class Registrar extends FrontendUsers\AbstractRegistrar
      */
     public function getUsername(): string
     {
-        $token = $this->getAttribute('token');
-        Apple::validateAccessToken($token);
-        $profileData = Apple::getProfileData($token);
+        $profileData = $this->getProfileDataFromToken();
 
         return $profileData['email'];
     }
