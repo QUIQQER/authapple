@@ -16,8 +16,6 @@ use QUI\Locale;
  * Class Auth
  *
  * Authentication handler for Apple authentication
- *
- * @package QUI\Apple\Auth
  */
 class Auth extends AbstractAuthenticator
 {
