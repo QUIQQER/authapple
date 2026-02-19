@@ -78,10 +78,15 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
         $Handler = FrontendUsers\Handler::getInstance();
         $settings = $Handler->getRegistrationSettings();
+        $allowUnverifiedEmailAddresses = (int)($settings['allowUnverifiedEmailAddresses'] ?? 0);
+        $emailVerified = filter_var(
+            $profileData['email_verified'] ?? false,
+            FILTER_VALIDATE_BOOLEAN
+        );
 
         if (
-            !(int)$settings['allowUnverifiedEmailAddresses']
-            && !(int)$profileData['email_verified']
+            !$allowUnverifiedEmailAddresses
+            && !$emailVerified
         ) {
             throw new FrontendUsers\Exception([
                 $lg,
@@ -111,7 +116,11 @@ class Registrar extends FrontendUsers\AbstractRegistrar
         ]);
 
 
-        $User->setAttribute(FrontendUsers\Handler::USER_ATTR_EMAIL_VERIFIED, boolval($profileData['email_verified']));
+        $emailVerified = filter_var(
+            $profileData['email_verified'] ?? false,
+            FILTER_VALIDATE_BOOLEAN
+        );
+        $User->setAttribute(FrontendUsers\Handler::USER_ATTR_EMAIL_VERIFIED, $emailVerified);
 
         $User->setPassword(QUI\Security\Password::generateRandom(), $SystemUser);
         $User->save($SystemUser);
