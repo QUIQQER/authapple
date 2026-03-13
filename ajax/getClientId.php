@@ -8,7 +8,7 @@
 
 use QUI\Apple\Apple;
 
-QUI::$Ajax->registerFunction(
+QUI::getAjax()->registerFunction(
     'package_quiqqer_authapple_ajax_getClientId',
     function () {
         return Apple::getClientId();

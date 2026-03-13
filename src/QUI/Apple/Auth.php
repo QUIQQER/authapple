@@ -21,6 +21,9 @@ class Auth extends AbstractAuthenticator
 {
     protected QUI\Interfaces\Users\User | null $User = null;
 
+    /**
+     * @param array<string, mixed>|int|string|User|null $user
+     */
     public function __construct(array | int | string | User | null $user = '')
     {
         if (!empty($user) && is_string($user)) {
@@ -38,6 +41,7 @@ class Auth extends AbstractAuthenticator
     }
 
     /**
+     * @param array<string, mixed>|int|string $authParams
      * @throws Exception
      */
     public function auth(array | int | string $authParams): void
@@ -66,6 +70,10 @@ class Auth extends AbstractAuthenticator
 
         $connectionProfile = Apple::getConnectedAccountByToken($token);
 
+        if ($connectionProfile === false || empty($connectionProfile['userId'])) {
+            throw new Exception('Apple user does not exist in QUIQQER', 401);
+        }
+
         try {
             $User = $Users->get($connectionProfile['userId']);
             // Apple::connectQuiqqerAccount($User->getUUID(), $token, false);
@@ -80,6 +88,10 @@ class Auth extends AbstractAuthenticator
 
     public function getUser(): User
     {
+        if ($this->User === null) {
+            return QUI::getUsers()->getNobody();
+        }
+
         return $this->User;
     }
 
