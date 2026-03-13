@@ -10,6 +10,11 @@ use Firebase\JWT\JWK;
 
 class Apple
 {
+    private static function getConfigValue(string $key): string
+    {
+        return (string)(QUI::getPackage('quiqqer/authapple')->getConfig()?->get('apiSettings', $key) ?? '');
+    }
+
     public static function table(): string
     {
         return QUI::getDBTableName('quiqqer_auth_apple');
@@ -17,7 +22,7 @@ class Apple
 
     public static function getClientId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleClientId');
+        return self::getConfigValue('appleClientId');
     }
 
     /**
@@ -25,7 +30,7 @@ class Apple
      */
     public static function getTeamId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleTeamId');
+        return self::getConfigValue('appleTeamId');
     }
 
     /**
@@ -33,7 +38,7 @@ class Apple
      */
     public static function getKeyId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'appleKeyId');
+        return self::getConfigValue('appleKeyId');
     }
 
     /**
@@ -41,7 +46,7 @@ class Apple
      */
     public static function getPrivateKeyId(): string
     {
-        return QUI::getPackage('quiqqer/authapple')->getConfig()->get('apiSettings', 'applePrivateKey');
+        return self::getConfigValue('applePrivateKey');
     }
 
     /**
@@ -89,6 +94,7 @@ class Apple
     }
 
     /**
+     * @return array<string, mixed>|false
      * @throws Exception
      * @throws QUI\Database\Exception
      */
@@ -108,7 +114,13 @@ class Apple
             return false;
         }
 
-        return current($result);
+        $account = current($result);
+
+        if (!is_array($account)) {
+            return false;
+        }
+
+        return $account;
     }
 
     /**
@@ -137,15 +149,16 @@ class Apple
     }
 
     /**
+     * @param int|string $userId
      * @throws Exception
      */
-    public static function checkEditPermission($userId): void
+    public static function checkEditPermission(int | string $userId): void
     {
         if (QUI::getUserBySession()->getUUID() === QUI::getUsers()->getSystemUser()->getUUID()) {
             return;
         }
 
-        if (QUI::getSession()->get('uid') !== $userId || !$userId) {
+        if (QUI::getSession()?->get('uid') !== $userId || !$userId) {
             throw new QUI\Permissions\Exception(
                 QUI::getLocale()->get(
                     'quiqqer/authapple',
@@ -315,9 +328,10 @@ class Apple
     }
 
     /**
+     * @param string $idToken
      * @throws QUI\Users\Exception
      */
-    public static function getUserByToken($idToken): QUI\Interfaces\Users\User
+    public static function getUserByToken(string $idToken): QUI\Interfaces\Users\User
     {
         self::validateAccessToken($idToken);
         $data = self::getProfileData($idToken);
@@ -358,7 +372,11 @@ class Apple
         );
     }
 
-    public static function getProfileData($idToken)
+    /**
+     * @param string $idToken
+     * @return array<string, mixed>
+     */
+    public static function getProfileData(string $idToken): array
     {
         /*
         {
