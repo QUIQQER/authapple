@@ -14,8 +14,14 @@ use QUI\Permissions\Exception;
  */
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
+    /**
+     * @var array<string, mixed>|null
+     */
     private ?array $profileData = null;
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getProfileDataFromToken(): array
     {
         if (!is_null($this->profileData)) {
@@ -24,9 +30,10 @@ class Registrar extends FrontendUsers\AbstractRegistrar
 
         $token = $this->getAttribute('token');
         Apple::validateAccessToken($token);
-        $this->profileData = Apple::getProfileData($token);
+        $profileData = Apple::getProfileData($token);
+        $this->profileData = $profileData;
 
-        return $this->profileData;
+        return $profileData;
     }
 
     // region auth stuff
