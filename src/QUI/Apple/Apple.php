@@ -77,13 +77,13 @@ class Apple
             ]);
         }
 
-        QUI::getDataBase()->insert(
-            self::table(),
+        QUI::getDataBaseConnection()->insert(
+            QUI\Utils\Doctrine::quoteIdentifier(self::table()),
             [
-                'userId' => $User->getUUID(),
-                'appleSub' => $profileData['sub'],
-                'email' => $profileData['email'],
-                'name' => $profileData['email']
+                QUI\Utils\Doctrine::quoteIdentifier('userId') => $User->getUUID(),
+                QUI\Utils\Doctrine::quoteIdentifier('appleSub') => $profileData['sub'],
+                QUI\Utils\Doctrine::quoteIdentifier('email') => $profileData['email'],
+                QUI\Utils\Doctrine::quoteIdentifier('name') => $profileData['email']
             ]
         );
 
@@ -103,24 +103,7 @@ class Apple
         self::validateAccessToken($idToken);
         $profile = self::getProfileData($idToken);
 
-        $result = QUI::getDataBase()->fetch([
-            'from' => self::table(),
-            'where' => [
-                'appleSub' => $profile['sub']
-            ]
-        ]);
-
-        if (empty($result)) {
-            return false;
-        }
-
-        $account = current($result);
-
-        if (!is_array($account)) {
-            return false;
-        }
-
-        return $account;
+        return self::getAccountByAppleSub((string)$profile['sub']);
     }
 
     /**
@@ -142,9 +125,9 @@ class Apple
             return;
         }
 
-        QUI::getDataBase()->delete(
-            self::table(),
-            ['userId' => $userUuid]
+        QUI::getDataBaseConnection()->delete(
+            QUI\Utils\Doctrine::quoteIdentifier(self::table()),
+            [QUI\Utils\Doctrine::quoteIdentifier('userId') => $userUuid]
         );
     }
 
@@ -287,19 +270,13 @@ class Apple
             return false;
         }
 
-        $result = QUI::getDataBase()->fetch([
-            'from' => self::table(),
-            'where' => [
-                'appleSub' => $appleSub
-            ],
-            'limit' => 1
-        ]);
+        $account = self::getAccountByAppleSub((string)$appleSub);
 
-        if (empty($result)) {
+        if ($account === false) {
             return false;
         }
 
-        $userId = $result[0]['userId'];
+        $userId = $account['userId'] ?? null;
 
         if (empty($userId)) {
             return false;
@@ -348,16 +325,10 @@ class Apple
         }
 
         try {
-            $result = QUI::getDataBase()->fetch([
-                'from' => self::table(),
-                'where' => [
-                    'appleSub' => $appleSub
-                ],
-                'limit' => 1
-            ]);
+            $account = self::getAccountByAppleSub((string)$appleSub);
 
-            if (isset($result[0]['userId'])) {
-                return QUI::getUsers()->get($result[0]['userId']);
+            if ($account !== false && isset($account['userId'])) {
+                return QUI::getUsers()->get($account['userId']);
             }
         } catch (\Exception $e) {
             QUI\System\Log::addError($e->getMessage());
@@ -424,5 +395,23 @@ class Apple
         }
 
         return $data;
+    }
+
+    /**
+     * @return array<string, mixed>|false
+     * @throws \Doctrine\DBAL\Exception
+     */
+    private static function getAccountByAppleSub(string $appleSub): array | false
+    {
+        $QueryBuilder = QUI::getQueryBuilder();
+
+        return $QueryBuilder
+            ->select('*')
+            ->from(QUI\Utils\Doctrine::quoteIdentifier(self::table()))
+            ->where($QueryBuilder->expr()->eq('appleSub', ':appleSub'))
+            ->setParameter('appleSub', $appleSub)
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
     }
 }

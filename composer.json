@@ -2,15 +2,24 @@
     "name": "quiqqer/authapple",
     "type": "quiqqer-module",
     "description": "QUIQQER registration and authentication with Apple account",
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "homepage": "https://www.quiqqer.com",
-    "authors": [],
+    "authors": [
+        {
+            "name": "PCSG - Computer & Internet Service OHG",
+            "email": "info@quiqqer.com",
+            "homepage": "https://www.quiqqer.com",
+            "role": "Maintainer"
+        }
+    ],
     "support": {
         "email": "support@pcsg.de",
-        "url": "https://www.pcsg.de"
+        "issues": "https://dev.quiqqer.com/quiqqer/authapple/issues",
+        "source": "https://dev.quiqqer.com/quiqqer/authapple"
     },
     "require": {
-        "quiqqer/core": "^2.2",
+        "php": "^8.2",
+        "quiqqer/core": "^2.24",
         "quiqqer/frontend-users": "^2.8",
         "firebase/php-jwt": "^7"
     },

@@ -44,7 +44,7 @@ class Auth extends AbstractAuthenticator
      * @param array<string, mixed>|int|string $authParams
      * @throws Exception
      */
-    public function auth(array | int | string $authParams): void
+    public function auth(array | int | string $authParams): bool
     {
         if (!is_array($authParams) || !isset($authParams['token'])) {
             throw new QUI\Exception([
@@ -84,6 +84,8 @@ class Auth extends AbstractAuthenticator
         } catch (QUI\Exception) {
             throw new Exception('Apple user does not exist in QUIQQER', 401);
         }
+
+        return true;
     }
 
     public function getUser(): User

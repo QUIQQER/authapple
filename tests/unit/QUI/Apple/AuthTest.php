@@ -4,6 +4,7 @@ namespace QUI\Apple;
 
 use PHPUnit\Framework\TestCase;
 use QUI\Apple\Controls\Button;
+use ReflectionMethod;
 
 class AuthTest extends TestCase
 {
@@ -23,5 +24,13 @@ class AuthTest extends TestCase
     {
         $control = Auth::getLoginControl();
         $this->assertInstanceOf(Button::class, $control);
+    }
+
+    public function testAuthDeclaresBooleanResult(): void
+    {
+        $returnType = (new ReflectionMethod(Auth::class, 'auth'))->getReturnType();
+
+        $this->assertNotNull($returnType);
+        $this->assertSame('bool', $returnType->getName());
     }
 }
