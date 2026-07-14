@@ -109,7 +109,7 @@
         </locale>
         <locale name="exception.auth.wrong.account.for.user">
             <de><![CDATA[Dieses Apple-Konto ist nicht mit dem übergebenen Benutzerkonto verknüpft.]]></de>
-            <en><![CDATA[This Apple Account is not linked to the user ccount you submitted.]]></en>
+            <en><![CDATA[This Apple Account is not linked to the user account you submitted.]]></en>
         </locale>
         <locale name="exception.apple.invalid.token">
             <de><![CDATA[Das Apple-Token ist ungültig oder abgelaufen.]]></de>
