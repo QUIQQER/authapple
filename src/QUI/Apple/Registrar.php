@@ -14,6 +14,23 @@ use QUI\Permissions\Exception;
  */
 class Registrar extends FrontendUsers\AbstractRegistrar
 {
+    public function getDefaultActivationMode(): string
+    {
+        return FrontendUsers\Handler::ACTIVATION_MODE_AUTO;
+    }
+
+    public function supportsActivationMode(string $activationMode): bool
+    {
+        return in_array(
+            $activationMode,
+            [
+                FrontendUsers\Handler::ACTIVATION_MODE_AUTO,
+                FrontendUsers\Handler::ACTIVATION_MODE_MANUAL
+            ],
+            true
+        );
+    }
+
     /**
      * @var array<string, mixed>|null
      */
