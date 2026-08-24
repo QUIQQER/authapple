@@ -8,6 +8,22 @@
             <locale group="quiqqer/authapple" var="package.description"/>
         </description>
 
+        <capabilities schemaVersion="1">
+            <capability id="authentication.apple-sign-in">
+                <title>Sign in with Apple</title>
+                <description>
+                    Authenticates QUIQQER users through verified Sign in with Apple identity tokens and linked user accounts.
+                </description>
+            </capability>
+
+            <capability id="identity.apple-registration">
+                <title>Apple account registration</title>
+                <description>
+                    Registers QUIQQER users from verified Apple identity data and links the Apple subject to the new account.
+                </description>
+            </capability>
+        </capabilities>
+
         <image src="URL_OPT_DIR/quiqqer/authapple/bin/images/Logo.png"/>
 
         <support>
