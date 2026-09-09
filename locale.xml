@@ -4,90 +4,180 @@
         <locale name="authapple.title">
             <de><![CDATA[Apple Login]]></de>
             <en><![CDATA[Apple Login]]></en>
+            <es><![CDATA[Iniciar sesión con Apple]]></es>
+            <pt><![CDATA[Iniciar sessão com a Apple]]></pt>
+            <fr><![CDATA[Connexion avec Apple]]></fr>
+            <it><![CDATA[Accedi con Apple]]></it>
+            <pl><![CDATA[Logowanie przez Apple]]></pl>
         </locale>
         <locale name="authapple.description">
             <de><![CDATA[QUIQQER Authentifikation mittels Apple-Konto]]></de>
             <en><![CDATA[QUIQQER authentication via Apple Account]]></en>
+            <es><![CDATA[Autenticación en QUIQQER con una cuenta de Apple]]></es>
+            <pt><![CDATA[Autenticação no QUIQQER com uma conta Apple]]></pt>
+            <fr><![CDATA[Authentification dans QUIQQER avec un compte Apple]]></fr>
+            <it><![CDATA[Autenticazione in QUIQQER tramite un account Apple]]></it>
+            <pl><![CDATA[Uwierzytelnianie w QUIQQER za pomocą konta Apple]]></pl>
         </locale>
 
         <!-- Permission -->
         <locale name="permission.quiqqer.auth._header">
             <de><![CDATA[QUIQQER Authentifizierung]]></de>
             <en><![CDATA[QUIQQER authentication]]></en>
+            <es><![CDATA[Autenticación de QUIQQER]]></es>
+            <pt><![CDATA[Autenticação do QUIQQER]]></pt>
+            <fr><![CDATA[Authentification QUIQQER]]></fr>
+            <it><![CDATA[Autenticazione QUIQQER]]></it>
+            <pl><![CDATA[Uwierzytelnianie QUIQQER]]></pl>
         </locale>
 
         <!-- Package -->
         <locale name="package.title">
             <de><![CDATA[Apple Registrierung und Login für QUIQQER]]></de>
             <en><![CDATA[Apple registration and login for QUIQQER]]></en>
+            <es><![CDATA[Registro e inicio de sesión con Apple en QUIQQER]]></es>
+            <pt><![CDATA[Registo e início de sessão com a Apple no QUIQQER]]></pt>
+            <fr><![CDATA[Inscription et connexion avec Apple dans QUIQQER]]></fr>
+            <it><![CDATA[Registrazione e accesso con Apple in QUIQQER]]></it>
+            <pl><![CDATA[Rejestracja i logowanie przez Apple w QUIQQER]]></pl>
         </locale>
         <locale name="package.description">
             <de><![CDATA[QUIQQER Registrierung und Authentifikation mittels Apple-Konto]]></de>
             <en><![CDATA[QUIQQER registration and authentication via Apple Account]]></en>
+            <es><![CDATA[Registro y autenticación en QUIQQER con una cuenta de Apple]]></es>
+            <pt><![CDATA[Registo e autenticação no QUIQQER com uma conta Apple]]></pt>
+            <fr><![CDATA[Inscription et authentification dans QUIQQER avec un compte Apple]]></fr>
+            <it><![CDATA[Registrazione e autenticazione in QUIQQER tramite un account Apple]]></it>
+            <pl><![CDATA[Rejestracja i uwierzytelnianie w QUIQQER za pomocą konta Apple]]></pl>
         </locale>
 
         <locale name="registrar.title">
             <de><![CDATA[Registrierung via Apple]]></de>
             <en><![CDATA[Registration via Apple]]></en>
+            <es><![CDATA[Registro con Apple]]></es>
+            <pt><![CDATA[Registo com a Apple]]></pt>
+            <fr><![CDATA[Inscription avec Apple]]></fr>
+            <it><![CDATA[Registrazione con Apple]]></it>
+            <pl><![CDATA[Rejestracja przez Apple]]></pl>
         </locale>
         <locale name="registrar.description">
             <de><![CDATA[QUIQQER Registrierung und Authentifikation mittels Apple-Konto]]></de>
             <en><![CDATA[QUIQQER registration and authentication via Apple Account]]></en>
+            <es><![CDATA[Registro y autenticación en QUIQQER con una cuenta de Apple]]></es>
+            <pt><![CDATA[Registo e autenticação no QUIQQER com uma conta Apple]]></pt>
+            <fr><![CDATA[Inscription et authentification dans QUIQQER avec un compte Apple]]></fr>
+            <it><![CDATA[Registrazione e autenticazione in QUIQQER tramite un account Apple]]></it>
+            <pl><![CDATA[Rejestracja i uwierzytelnianie w QUIQQER za pomocą konta Apple]]></pl>
         </locale>
         <locale name="button.title">
             <de><![CDATA[Weiter mit Apple]]></de>
             <en><![CDATA[Continue with Apple]]></en>
+            <es><![CDATA[Continuar con Apple]]></es>
+            <pt><![CDATA[Continuar com a Apple]]></pt>
+            <fr><![CDATA[Continuer avec Apple]]></fr>
+            <it><![CDATA[Continua con Apple]]></it>
+            <pl><![CDATA[Kontynuuj z Apple]]></pl>
         </locale>
 
         <locale name="settings.title">
             <de><![CDATA[Apple Registrierung / Authentifikation]]></de>
             <en><![CDATA[Apple registration / authentication]]></en>
+            <es><![CDATA[Registro y autenticación con Apple]]></es>
+            <pt><![CDATA[Registo e autenticação com a Apple]]></pt>
+            <fr><![CDATA[Inscription et authentification avec Apple]]></fr>
+            <it><![CDATA[Registrazione e autenticazione con Apple]]></it>
+            <pl><![CDATA[Rejestracja i uwierzytelnianie przez Apple]]></pl>
         </locale>
 
         <locale name="settings.category.settings.title">
             <de><![CDATA[API-Einstellungen]]></de>
             <en><![CDATA[API Settings]]></en>
+            <es><![CDATA[Configuración de la API]]></es>
+            <pt><![CDATA[Definições da API]]></pt>
+            <fr><![CDATA[Paramètres de l’API]]></fr>
+            <it><![CDATA[Impostazioni API]]></it>
+            <pl><![CDATA[Ustawienia API]]></pl>
         </locale>
 
         <locale name="settings.apiSettings.title">
             <de><![CDATA[API-Zugangsdaten]]></de>
             <en><![CDATA[API Credentials]]></en>
+            <es><![CDATA[Credenciales de la API]]></es>
+            <pt><![CDATA[Credenciais da API]]></pt>
+            <fr><![CDATA[Identifiants d’accès à l’API]]></fr>
+            <it><![CDATA[Credenziali API]]></it>
+            <pl><![CDATA[Dane dostępowe do API]]></pl>
         </locale>
 
         <locale name="settings.apiSettings.clientId.title">
             <de><![CDATA[Client ID (Service ID)]]></de>
             <en><![CDATA[Client ID (Service ID)]]></en>
+            <es><![CDATA[ID de cliente (Service ID)]]></es>
+            <pt><![CDATA[ID de cliente (Service ID)]]></pt>
+            <fr><![CDATA[ID client (Service ID)]]></fr>
+            <it><![CDATA[ID client (Service ID)]]></it>
+            <pl><![CDATA[Identyfikator klienta (Service ID)]]></pl>
         </locale>
         <locale name="settings.apiSettings.clientId.description">
             <de><![CDATA[
             Die Service-ID, die du in deinem Apple Developer Account erstellt hast (z.B. com.meinprojekt.web).
             ]]></de>
             <en><![CDATA[The Service ID you created in your Apple Developer account (e.g. com.myproject.web).]]></en>
+            <es><![CDATA[El identificador de servicio (Service ID) que ha creado en su cuenta de Apple Developer, por ejemplo, com.myproject.web.]]></es>
+            <pt><![CDATA[O identificador de serviço (Service ID) que criou na sua conta Apple Developer, por exemplo, com.myproject.web.]]></pt>
+            <fr><![CDATA[L’identifiant de service (Service ID) que vous avez créé dans votre compte Apple Developer, par exemple com.myproject.web.]]></fr>
+            <it><![CDATA[L’identificatore del servizio (Service ID) che hai creato nel tuo account Apple Developer, ad esempio com.myproject.web.]]></it>
+            <pl><![CDATA[Identyfikator usługi (Service ID) utworzony na Twoim koncie Apple Developer, na przykład com.myproject.web.]]></pl>
         </locale>
 
         <locale name="settings.apiSettings.teamId.title">
             <de><![CDATA[Team ID]]></de>
             <en><![CDATA[Team ID]]></en>
+            <es><![CDATA[ID del equipo (Team ID)]]></es>
+            <pt><![CDATA[ID da equipa (Team ID)]]></pt>
+            <fr><![CDATA[ID d’équipe (Team ID)]]></fr>
+            <it><![CDATA[ID team (Team ID)]]></it>
+            <pl><![CDATA[Identyfikator zespołu (Team ID)]]></pl>
         </locale>
         <locale name="settings.apiSettings.teamId.description">
             <de>
                 <![CDATA[Deine Team-ID aus dem Apple Developer Account (unter Mitgliedschaft/Membership sichtbar).]]></de>
             <en><![CDATA[Your Team ID from your Apple Developer account (visible under Membership).]]></en>
+            <es><![CDATA[El identificador de su equipo (Team ID), disponible en la sección Membership de su cuenta de Apple Developer.]]></es>
+            <pt><![CDATA[O identificador da sua equipa (Team ID), disponível na secção Membership da sua conta Apple Developer.]]></pt>
+            <fr><![CDATA[L’identifiant de votre équipe (Team ID), disponible dans la rubrique Membership de votre compte Apple Developer.]]></fr>
+            <it><![CDATA[L’identificatore del tuo team (Team ID), disponibile nella sezione Membership del tuo account Apple Developer.]]></it>
+            <pl><![CDATA[Identyfikator Twojego zespołu (Team ID), dostępny w sekcji Membership na Twoim koncie Apple Developer.]]></pl>
         </locale>
 
         <locale name="settings.apiSettings.keyId.title">
             <de><![CDATA[Key ID]]></de>
             <en><![CDATA[Key ID]]></en>
+            <es><![CDATA[ID de clave (Key ID)]]></es>
+            <pt><![CDATA[ID da chave (Key ID)]]></pt>
+            <fr><![CDATA[ID de clé (Key ID)]]></fr>
+            <it><![CDATA[ID chiave (Key ID)]]></it>
+            <pl><![CDATA[Identyfikator klucza (Key ID)]]></pl>
         </locale>
         <locale name="settings.apiSettings.keyId.description">
             <de>
                 <![CDATA[Die Key-ID deines privaten Schlüssels (.p8-Datei), den du für „Sign in with Apple“ erstellt hast.]]></de>
             <en><![CDATA[The Key ID of your private key (.p8 file) you created for Sign in with Apple.]]></en>
+            <es><![CDATA[El identificador de la clave privada (Key ID) del archivo .p8 que ha creado para iniciar sesión con Apple.]]></es>
+            <pt><![CDATA[O identificador da chave privada (Key ID) do ficheiro .p8 que criou para iniciar sessão com a Apple.]]></pt>
+            <fr><![CDATA[L’identifiant de la clé privée (Key ID) du fichier .p8 que vous avez créé pour la connexion avec Apple.]]></fr>
+            <it><![CDATA[L’identificatore della chiave privata (Key ID) del file .p8 che hai creato per l’accesso con Apple.]]></it>
+            <pl><![CDATA[Identyfikator klucza prywatnego (Key ID) z pliku .p8 utworzonego na potrzeby logowania przez Apple.]]></pl>
         </locale>
 
         <locale name="settings.apiSettings.privateKey.title">
             <de><![CDATA[Privater Schlüssel (.p8)]]></de>
             <en><![CDATA[Private Key (.p8)]]></en>
+            <es><![CDATA[Clave privada (.p8)]]></es>
+            <pt><![CDATA[Chave privada (.p8)]]></pt>
+            <fr><![CDATA[Clé privée (.p8)]]></fr>
+            <it><![CDATA[Chiave privata (.p8)]]></it>
+            <pl><![CDATA[Klucz prywatny (.p8)]]></pl>
         </locale>
         <locale name="settings.apiSettings.privateKey.description">
             <de><![CDATA[
@@ -96,24 +186,49 @@
             <en><![CDATA[
             Paste the content of your .p8 file here, which you downloaded from Apple after creating the key.
             ]]></en>
+            <es><![CDATA[Pegue aquí el contenido del archivo .p8 que descargó de Apple después de crear la clave.]]></es>
+            <pt><![CDATA[Cole aqui o conteúdo do ficheiro .p8 que descarregou da Apple depois de criar a chave.]]></pt>
+            <fr><![CDATA[Collez ici le contenu du fichier .p8 téléchargé auprès d’Apple après la création de la clé.]]></fr>
+            <it><![CDATA[Incolla qui il contenuto del file .p8 che hai scaricato da Apple dopo aver creato la chiave.]]></it>
+            <pl><![CDATA[Wklej tutaj zawartość pliku .p8 pobranego od Apple po utworzeniu klucza.]]></pl>
         </locale>
 
         <!-- Class: Auth -->
         <locale name="exception.auth.wrong.data">
             <de><![CDATA[Die zur Authentifizierung übermittelten Daten sind nicht korrekt.]]></de>
             <en><![CDATA[The data sent for authentication is not correct.]]></en>
+            <es><![CDATA[Los datos enviados para la autenticación no son correctos.]]></es>
+            <pt><![CDATA[Os dados enviados para a autenticação estão incorretos.]]></pt>
+            <fr><![CDATA[Les données transmises pour l’authentification sont incorrectes.]]></fr>
+            <it><![CDATA[I dati inviati per l’autenticazione non sono corretti.]]></it>
+            <pl><![CDATA[Dane przesłane do uwierzytelnienia są nieprawidłowe.]]></pl>
         </locale>
         <locale name="exception.auth.no.account.connected">
             <de><![CDATA[Mit diesem Apple-Konto ist kein Benutzerkonto verknüpft.]]></de>
             <en><![CDATA[No user account is associated with this Apple Account.]]></en>
+            <es><![CDATA[No hay ninguna cuenta de usuario vinculada a esta cuenta de Apple.]]></es>
+            <pt><![CDATA[Não existe nenhuma conta de utilizador associada a esta conta Apple.]]></pt>
+            <fr><![CDATA[Aucun compte utilisateur n’est associé à ce compte Apple.]]></fr>
+            <it><![CDATA[Nessun account utente è collegato a questo account Apple.]]></it>
+            <pl><![CDATA[Z tym kontem Apple nie jest połączone żadne konto użytkownika.]]></pl>
         </locale>
         <locale name="exception.auth.wrong.account.for.user">
             <de><![CDATA[Dieses Apple-Konto ist nicht mit dem übergebenen Benutzerkonto verknüpft.]]></de>
             <en><![CDATA[This Apple Account is not linked to the user account you submitted.]]></en>
+            <es><![CDATA[Esta cuenta de Apple no está vinculada a la cuenta de usuario indicada.]]></es>
+            <pt><![CDATA[Esta conta Apple não está associada à conta de utilizador indicada.]]></pt>
+            <fr><![CDATA[Ce compte Apple n’est pas associé au compte utilisateur indiqué.]]></fr>
+            <it><![CDATA[Questo account Apple non è collegato all’account utente indicato.]]></it>
+            <pl><![CDATA[To konto Apple nie jest połączone ze wskazanym kontem użytkownika.]]></pl>
         </locale>
         <locale name="exception.apple.invalid.token">
             <de><![CDATA[Das Apple-Token ist ungültig oder abgelaufen.]]></de>
             <en><![CDATA[The Apple token is invalid or expired.]]></en>
+            <es><![CDATA[El token de Apple no es válido o ha caducado.]]></es>
+            <pt><![CDATA[O token da Apple é inválido ou expirou.]]></pt>
+            <fr><![CDATA[Le jeton Apple est invalide ou a expiré.]]></fr>
+            <it><![CDATA[Il token Apple non è valido o è scaduto.]]></it>
+            <pl><![CDATA[Token Apple jest nieprawidłowy lub wygasł.]]></pl>
         </locale>
 
         <!-- Class: Registrar -->
@@ -121,28 +236,53 @@
             <de>
                 <![CDATA[Bei der Überprüfung Ihres Apple-Kontos ist ein Fehler aufgetreten. Bitte wenden Sie sich an einen Administrator.]]></de>
             <en><![CDATA[There was an error checking your Apple account. Please contact an administrator.]]></en>
+            <es><![CDATA[Se ha producido un error al verificar su cuenta de Apple. Póngase en contacto con un administrador.]]></es>
+            <pt><![CDATA[Ocorreu um erro ao verificar a sua conta Apple. Contacte um administrador.]]></pt>
+            <fr><![CDATA[Une erreur s’est produite lors de la vérification de votre compte Apple. Contactez un administrateur.]]></fr>
+            <it><![CDATA[Si è verificato un errore durante la verifica del tuo account Apple. Contatta un amministratore.]]></it>
+            <pl><![CDATA[Wystąpił błąd podczas sprawdzania Twojego konta Apple. Skontaktuj się z administratorem.]]></pl>
         </locale>
         <locale name="exception.registrar.email_address_empty">
             <de>
                 <![CDATA[Ihre E-Mail-Adresse konnte nicht aus Ihrem Apple-Profil abgerufen werden. Bitte autorisieren Sie den Zugriff auf Ihre E-Mail-Adresse.]]></de>
             <en>
                 <![CDATA[Your email address could not be retrieved from your Apple profile. Please authorize access to your e-mail address.]]></en>
+            <es><![CDATA[No se ha podido obtener la dirección de correo electrónico de su perfil de Apple. Autorice el acceso a su dirección de correo electrónico.]]></es>
+            <pt><![CDATA[Não foi possível obter o endereço de e-mail do seu perfil Apple. Autorize o acesso ao seu endereço de e-mail.]]></pt>
+            <fr><![CDATA[Impossible de récupérer l’adresse e-mail de votre profil Apple. Autorisez l’accès à votre adresse e-mail.]]></fr>
+            <it><![CDATA[Non è stato possibile recuperare l’indirizzo email dal tuo profilo Apple. Autorizza l’accesso al tuo indirizzo email.]]></it>
+            <pl><![CDATA[Nie udało się pobrać adresu e-mail z Twojego profilu Apple. Zezwól na dostęp do swojego adresu e-mail.]]></pl>
         </locale>
         <locale name="exception.registrar.email_already_exists">
             <de>
                 <![CDATA[Es existiert bereits ein Benutzerkonto mit Ihrer bei Apple hinterlegten E-Mail-Adresse.]]></de>
             <en><![CDATA[There is already a user account with your Apple e-mail address.]]></en>
+            <es><![CDATA[Ya existe una cuenta de usuario con la dirección de correo electrónico de su cuenta de Apple.]]></es>
+            <pt><![CDATA[Já existe uma conta de utilizador com o endereço de e-mail da sua conta Apple.]]></pt>
+            <fr><![CDATA[Un compte utilisateur existe déjà avec l’adresse e-mail de votre compte Apple.]]></fr>
+            <it><![CDATA[Esiste già un account utente con l’indirizzo email del tuo account Apple.]]></it>
+            <pl><![CDATA[Konto użytkownika z adresem e-mail Twojego konta Apple już istnieje.]]></pl>
         </locale>
         <locale name="exception.registrar.email_not_verified">
             <de>
                 <![CDATA[Ihre bei Apple hinterlegte E-Mail-Adresse ist noch nicht verifiziert. Bitte verifizieren Sie Ihre E-Mail-Adresse bei Apple, um sich zu registrieren.]]></de>
             <en>
                 <![CDATA[Your Apple e-mail address is not yet verified. Please verify your e-mail address at Apple to register.]]></en>
+            <es><![CDATA[La dirección de correo electrónico de su cuenta de Apple aún no está verificada. Verifíquela en Apple para poder registrarse.]]></es>
+            <pt><![CDATA[O endereço de e-mail da sua conta Apple ainda não está verificado. Verifique-o na Apple para se poder registar.]]></pt>
+            <fr><![CDATA[L’adresse e-mail de votre compte Apple n’a pas encore été vérifiée. Vérifiez-la auprès d’Apple pour pouvoir vous inscrire.]]></fr>
+            <it><![CDATA[L’indirizzo email del tuo account Apple non è ancora verificato. Verificalo su Apple per poterti registrare.]]></it>
+            <pl><![CDATA[Adres e-mail Twojego konta Apple nie został jeszcze zweryfikowany. Zweryfikuj go w Apple, aby się zarejestrować.]]></pl>
         </locale>
 
         <locale name="exception.operation.only.allowed.by.own.user">
             <de><![CDATA[Diese Abfrage darf nur vom übergebenen Benutzer selbst durchgeführt werden.]]></de>
             <en><![CDATA[This request can only be executed by the given user.]]></en>
+            <es><![CDATA[Solo el usuario indicado puede realizar esta solicitud.]]></es>
+            <pt><![CDATA[Este pedido só pode ser efetuado pelo próprio utilizador indicado.]]></pt>
+            <fr><![CDATA[Seul l’utilisateur concerné peut effectuer cette demande.]]></fr>
+            <it><![CDATA[Solo l’utente indicato può eseguire questa richiesta.]]></it>
+            <pl><![CDATA[To żądanie może wykonać wyłącznie wskazany użytkownik.]]></pl>
         </locale>
     </groups>
 </locales>
